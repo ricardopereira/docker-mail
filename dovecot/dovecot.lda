@@ -1,0 +1,4 @@
+protocol lda {
+  hostname = example.com
+  mail_plugin_dir = /usr/lib/dovecot/modules/lda
+}

@@ -1,0 +1,4 @@
+ssl = required
+disable_plaintext_auth = yes
+ssl_cert = </srv/cert/cert.pem
+ssl_key = </srv/cert/key.pem
