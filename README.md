@@ -3,22 +3,22 @@ docker-mail
 
 A mail server in a box.
 
-A secure, minimal-configuration mail server in a docker container base on [lava/dockermail](https://github.com/lava/dockermail).
+"A secure, minimal-configuration mail server in a docker container" based on [lava/dockermail](https://github.com/lava/dockermail).
 
-This repository is tailored to small private servers, where you own some domain(s) and
+"This repository is tailored to small private servers, where you own some domain(s) and
 want to receive the mail for and send mail from this domain. It consists of 2 separate docker containers:
 
  - **dovecot**: The SMTP and IMAP server with DKIM. This container uses postfix as MTA and dovecot as IMAP server.
     All incoming mail to your own domains is accepted. For outgoing mail, only authenticated (logged in with username and password)
     clients can send messages via STARTTLS on port 587. In theory it works with all mail clients, but it was only tested with Mail.app.
 
- - **mail-base**: This image is just an implementation detail. It is a workaround to allow sharing of configuration files between multiple docker images. 
+ - **mail-base**: This image is just an implementation detail. It is a workaround to allow sharing of configuration files between multiple docker images."
 
 
 Setup
 =====
 
-You need to clone the repository or extract the source to a accessible docker machine.
+###### You need to clone the repository or extract the source to a accessible docker machine.
 
 1) Add all domains you want to receive mail for to the file `mail-base/domains`, like this:
 
@@ -44,26 +44,27 @@ be delivered to the corresponding account in the right column.
 To get the hash values, you can either install dovecot locally or use lxc-attach to attach to the running
 container and run `doveadm pw -s SHA256-CRYPT` inside.
 
-4) Add certificate files to `dovecot/cert`.
+4) Add ssl certificate files to `dovecot/cert`.
 
  - cert.pem: ssl bundle
  - key.pem: private key
 
 5) Change `MAILHOST` env variable from `dovecot/Dockerfile`.
 
-  Change `opendkim.keys`
-  Change `opendkim.sign`
-  Change `opendkim.trusted`
+  Change `opendkim.keys` file
+  
+  Change `opendkim.sign` file
+  
+  Change `opendkim.trusted` file
 
   Change `postfix.main.cf`:
 
-   - myhostname = example.com
-   - mydestination = mail.example.com
+    myhostname = example.com
+    mydestination = mail.example.com
 
   Change `dovecot.lda`:
 
-   - hostname = example.com
-
+    hostname = example.com
 
 6) Build containers:
 
@@ -79,8 +80,7 @@ container and run `doveadm pw -s SHA256-CRYPT` inside.
 
 9) Stop container:
 
-  Execute `docker ps` and get the id of the running container associated with the mail.
-  Execute `docker stop <pid>` to finish the container.
+  Execute `docker ps` and get the id of the running container associated with the mail. Then `docker stop <pid>` to finish the container.
 
 
 ### Mail log
